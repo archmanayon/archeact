@@ -1,34 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { MouseEvent, useState } from "react";
+import Forms from "./component/Forms";
+import Hello from "./component/Hello"
+import Messages from "./component/Messages"
+import SampleMap from "./component/SampleMap";
+import SampleTs from "./component/SampleTs";
+import TrialButton from "./component/TrialButton";
+import ShowColor from "./component/ShowColor";
+import Increment from "./component/Increment";
+import Fruit from "./component/Fruit";
+import Heart from "./component/Heart";
 // archie
 // from usc hello
 
-function App() {
-  const [count, setCount] = useState(0)
+
+
+function App() { 
+
+  const colors = ["red", "blue", "pink"]; 
+  const obj_ = {
+    school : "usc",
+    dept : "hrmo",
+    no_person : {male:"benjie", female:"olga", sex:"male"}
+  }
+
+  const selectItem =(item:MouseEvent)=>{console.log(item);}
+  
+
+  const [index_color, setIndex_color] = useState(-1);
+  const [show_c, setShow_c] = useState(false);
+  const [singleColor, setSingleColor] = useState('');
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* <Hello/>  
+
+      <Messages name="fortel" message="hi there" emoji=":D"/>
+      
+      <h1>Displaying Maps</h1>
+      <SampleMap colors={colors} object={obj_}/> */}
+
+      {/* <Forms /> */}
+
+      {/* <SampleTs selectItem={selectItem}>
+        Hello <span>world</span>
+      </SampleTs> */}
+
+      <TrialButton colors={colors} selectIndex=
+        {
+          (color, index)=>{
+            setIndex_color(index);            
+            setShow_c(!show_c);
+            setSingleColor(color);
+          }
+
+        } index_color={index_color}
+      />
+
+      <br/>
+
+      {
+        show_c && 
+        <ShowColor >
+          {singleColor}
+          <button type="button" className="btn-close" aria-label="Close"
+            onClick={()=> setShow_c(false)}>
+          </button>
+        </ShowColor>
+      }
+
+      {/* <Increment/> */}
+
+      {/* <Fruit/> */}
+
+      {/* <Heart/> */}
+
     </div>
   )
 }
