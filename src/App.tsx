@@ -80,7 +80,9 @@ function App() {
         {/* <Heart/> */}
       </>
       <NavCount countItems={cartItems.length} />
-      <ShopingCart cartItems={cartItems} onRemove={(index)=> setCartItems([...cartItems,"product-C"])}/>
+      <ShopingCart cartItems={cartItems} onRemove={(selectedIndex)=> cartItems.map((item,index)=> 
+          index == selectedIndex ? console.log(index+'found it'+selectedIndex) : console.log(item.length)
+        )}/>
 
     </div>
   )
