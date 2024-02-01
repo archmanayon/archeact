@@ -9,6 +9,8 @@ import ShowColor from "./component/ShowColor";
 import Increment from "./component/Increment";
 import Fruit from "./component/Fruit";
 import Heart from "./component/Heart";
+import { ShopingCart } from "./component/ShopingCart";
+import NavCount from "./component/NavCount";
 // archie
 // from usc hello
 
@@ -29,50 +31,56 @@ function App() {
   const [index_color, setIndex_color] = useState(-1);
   const [show_c, setShow_c] = useState(false);
   const [singleColor, setSingleColor] = useState('');
+  const [ cartItems, setCartItems ] =   useState(["product-A", "product-B"]);
 
   return (
     <div className="App">
-      {/* <Hello/>  
 
-      <Messages name="fortel" message="hi there" emoji=":D"/>
-      
-      <h1>Displaying Maps</h1>
-      <SampleMap colors={colors} object={obj_}/> */}
+      <>
+        {/* <Hello/>  
 
-      {/* <Forms /> */}
+        <Messages name="fortel" message="hi there" emoji=":D"/>
+        
+        <h1>Displaying Maps</h1>
+        <SampleMap colors={colors} object={obj_}/> */}
 
-      {/* <SampleTs selectItem={selectItem}>
-        Hello <span>world</span>
-      </SampleTs> */}
+        {/* <Forms /> */}
 
-      <TrialButton colors={colors} selectIndex=
-        {
-          (color, index)=>{
-            setIndex_color(index);            
-            setShow_c(!show_c);
-            setSingleColor(color);
-          }
+        {/* <SampleTs selectItem={selectItem}>
+          Hello <span>world</span>
+        </SampleTs> */}
 
-        } index_color={index_color}
-      />
+        {/* <TrialButton colors={colors} selectIndex=
+          {
+            (color, index)=>{
+              setIndex_color(index);            
+              setShow_c(!show_c);
+              setSingleColor(color);
+            }
 
-      <br/>
+          } index_color={index_color}
+        /> */}
 
-      {
-        show_c && 
-        <ShowColor >
-          {singleColor}
-          <button type="button" className="btn-close" aria-label="Close"
-            onClick={()=> setShow_c(false)}>
-          </button>
-        </ShowColor>
-      }
+        <br/>
 
-      {/* <Increment/> */}
+          {/* {
+            show_c && 
+            <ShowColor >
+              {singleColor}
+              <button type="button" className="btn-close" aria-label="Close"
+                onClick={()=> setShow_c(false)}>
+              </button>
+            </ShowColor>
+          } */}
 
-      {/* <Fruit/> */}
+        {/* <Increment/> */}
 
-      {/* <Heart/> */}
+        {/* <Fruit/> */}
+
+        {/* <Heart/> */}
+      </>
+      <NavCount countItems={cartItems.length} />
+      <ShopingCart cartItems={cartItems} onRemove={(index)=> console.log(index)}/>
 
     </div>
   )

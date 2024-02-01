@@ -5,6 +5,8 @@ const Fruit = () => {
         name:["Apple"],
         citrus:['orange','lemon']
     });
+
+    
   return (
     <div>
 
