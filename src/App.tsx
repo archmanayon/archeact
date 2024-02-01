@@ -80,7 +80,7 @@ function App() {
         {/* <Heart/> */}
       </>
       <NavCount countItems={cartItems.length} />
-      <ShopingCart cartItems={cartItems} onRemove={(index)=> console.log(index)}/>
+      <ShopingCart cartItems={cartItems} onRemove={(index)=> setCartItems([...cartItems,"product-C"])}/>
 
     </div>
   )
