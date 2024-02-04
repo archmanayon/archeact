@@ -31,7 +31,7 @@ function App() {
   const [index_color, setIndex_color] = useState(-1);
   const [show_c, setShow_c] = useState(false);
   const [singleColor, setSingleColor] = useState('');
-  const [ cartItems, setCartItems ] =   useState(["product-A", "product-B"]);
+  const [ cartItems, setCartItems ] =   useState(["product-A", "product-B", "product-C"]);
 
   return (
     <div className="App">
@@ -82,7 +82,7 @@ function App() {
       <NavCount countItems={cartItems.length} />
       <ShopingCart cartItems={cartItems} onRemove={(selectedIndex)=> cartItems.map((item,index)=> 
           index == selectedIndex 
-          ? setCartItems(['c', 'd'])
+          ? setCartItems(cartItems.filter((item,index)=> index!==selectedIndex))
           : console.log(item+"not selected")
         )}/>
 
