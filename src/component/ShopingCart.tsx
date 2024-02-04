@@ -10,6 +10,14 @@ export const ShopingCart = ({cartItems, onRemove, onInputSubmit}:Props) => {
     const [fromInput, setFromInput] = useState("");
   return (
     <>
+        <form>
+            
+            <input id="inpud_id" onChange={(e:ChangeEvent)=>setFromInput(e.target.value)} value={fromInput}></input>            
+            
+        </form>
+
+        <button onClick={()=> {onInputSubmit(fromInput); setFromInput("")}}>add to cart</button>
+
         <ul>
 
             {cartItems.map((item,index)=>                
@@ -24,12 +32,8 @@ export const ShopingCart = ({cartItems, onRemove, onInputSubmit}:Props) => {
         </ul>
                 
         
-        <form>
-            <input id="inpud_id" onChange={(e:ChangeEvent)=>setFromInput(e.target.value)} value={fromInput}></input>            
-            
-        </form>
-
-        <button onClick={()=> {onInputSubmit(fromInput); setFromInput("")}}>add to cart</button>
+       
+        
         
     </>
   )
