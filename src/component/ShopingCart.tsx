@@ -3,11 +3,11 @@ import { ChangeEvent, ChangeEventHandler, useState } from "react";
 interface Props{
     cartItems: string[];
     onRemove:(index:Number)=>void;
-    onAdd_toCard:(submit:String)=>void;
+    onInputSubmit:(submit:String)=>void;
    
 }
-export const ShopingCart = ({cartItems, onRemove, onAdd_toCard}:Props) => {
-    const [onTypeAdd, setOnTypeAdd] = useState("");
+export const ShopingCart = ({cartItems, onRemove, onInputSubmit}:Props) => {
+    const [fromInput, setFromInput] = useState("");
   return (
     <>
         <ul>
@@ -25,9 +25,12 @@ export const ShopingCart = ({cartItems, onRemove, onAdd_toCard}:Props) => {
                 
         
         <form>
-            <input onChange={(e:ChangeEvent)=>setOnTypeAdd(e.target.value)} value={onTypeAdd}></input>            
+            <input id="inpud_id" onChange={(e:ChangeEvent)=>setFromInput(e.target.value)} value={fromInput}></input>            
+            
         </form>
-        <button type="submit" onSubmit={()=> onAdd_toCard(...onTypeAdd,)}>add to cart</button>
+
+        <button onClick={()=> {onInputSubmit(fromInput); setFromInput("")}}>add to cart</button>
+        
     </>
   )
 }
