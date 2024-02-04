@@ -11,8 +11,8 @@ export const ShopingCart = ({cartItems, onRemove, onInputSubmit}:Props) => {
   return (
     <>
         <form>
-            
-            <input id="inpud_id" onChange={(e:ChangeEvent)=>setFromInput(e.target.value)} value={fromInput}></input>            
+
+            <input id="input_id" onChange={(e)=>setFromInput(e.target.value)} value={fromInput}></input>            
             
         </form>
 
