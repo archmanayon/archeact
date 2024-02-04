@@ -80,11 +80,10 @@ function App() {
         {/* <Heart/> */}
       </>
       <NavCount countItems={cartItems.length} />
-      <ShopingCart cartItems={cartItems} onRemove={(selectedIndex)=> cartItems.map((item,index)=> 
-          index == selectedIndex 
-          ? setCartItems(cartItems.filter((item,index)=> index!==selectedIndex))
-          : console.log(item+"not selected")
-        )}/>
+      <ShopingCart cartItems={cartItems} onRemove={(selectedIndex)=> 
+        setCartItems(cartItems.filter((item,index)=> index!==selectedIndex))
+        
+      }/>
 
     </div>
   )
