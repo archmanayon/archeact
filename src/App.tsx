@@ -81,9 +81,9 @@ function App() {
       </>
       <NavCount countItems={cartItems.length} />
       <ShopingCart cartItems={cartItems} onRemove={(selectedIndex)=> 
-        setCartItems(cartItems.filter((item,index)=> index!==selectedIndex))
-        
-      }/>
+        setCartItems(cartItems.filter((item,index)=> index!==selectedIndex))}
+        onAdd_toCard={(submit)=>setCartItems([...cartItems,submit])}
+      />
 
     </div>
   )
