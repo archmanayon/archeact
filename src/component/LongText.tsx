@@ -1,20 +1,21 @@
-import { ReactNode } from "react"
+import { ReactNode, useState } from "react"
 
 interface Props{
-    children:ReactNode;
-    lessText:Boolean;
-    textLength:Number;
-    handleLength:()=>void;
+    children:String;
 }
-const LongText = ({children, textLength, lessText, handleLength}:Props) => {
+
+const LongText = ({children}:Props) => {
+  
+  const [lessText, setLessText]=useState(true);
+  
   return (
-    <div>
-        <>{textLength}</>
-        <p>{children}
-        <button onClick={()=>handleLength()}> {lessText ?"read more . . ." : "show less . . ."}</button>
+    <div>          
+        <p>{lessText ? children.substring(0,15) : children}
+        <button onClick={()=> setLessText(!lessText)}> {lessText ?". . .read more" : "show less . . ."}</button>
         </p>
     </div>
   )
 }
+
 
 export default LongText
