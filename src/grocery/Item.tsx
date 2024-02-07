@@ -21,7 +21,7 @@ const Item = ({onAdd}:Props) => {
   });
 
   return (
-    <>a
+    <>
       <form onSubmit={(e)=> {
           e.preventDefault();
           onAdd(groceryItem);
