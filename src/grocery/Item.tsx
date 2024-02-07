@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 
-interface Props{
-    onSubmit : ({})=> void;
+interface Props{    
+    onAdd : ({}) => void;
 }
 
-const Item = ({onSubmit}:Props) => {
+const Item = ({onAdd}:Props) => {
+
   const [groceryItem, setGroceryItem] = useState({
     name: "",
     quantity: 0,
@@ -13,7 +14,7 @@ const Item = ({onSubmit}:Props) => {
 
   return (
     <>
-      <form onSubmit={()=>onSubmit(groceryItem)}>
+      <form>
         <label htmlFor="name"> Item </label>
         <input
           name="name"
@@ -44,7 +45,7 @@ const Item = ({onSubmit}:Props) => {
           }
         />
         <br />
-        <button>Add</button>
+        <button onClick={()=>onAdd(groceryItem)}>Add</button>
       </form>
     </>
   );
