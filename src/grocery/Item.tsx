@@ -52,7 +52,7 @@ const Item = ({onAdd}:Props) => {
               quantity: parseInt(e.target.value),
             })
           }
-        />aa
+        />
         <br />
         <label htmlFor="amount"> How Much </label>
         <input
