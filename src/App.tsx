@@ -2,6 +2,7 @@ import { MouseEvent, useState } from "react";
 
 import ListOfItems from "./grocery/ListOfItems";
 import Item from "./grocery/Item";
+import Increment from "./component/Increment";
 
 function App() { 
 
@@ -16,6 +17,7 @@ function App() {
           <Item onAdd = {onAdd}/>
           <ListOfItems list={list} handleDelete={(selectIndex)=> setList(list.filter((anItem, index)=> index !==selectIndex))}/>
         </div>
+        
     </div>
   )
 }

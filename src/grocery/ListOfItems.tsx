@@ -1,3 +1,5 @@
+import AmountAdjust from "./AmountAdjust";
+
 interface Props {
   list: [
     {
@@ -33,7 +35,9 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
               >
                 <td className="border border-slate-800">{item.itemName}</td>
                 <td className="border border-slate-800">{item.quantity.toString()}</td>
-                <td className="border border-slate-800">{item.amount.toString()}</td>
+                <td className="border border-slate-800">
+                  <AmountAdjust orig={item.amount}/>
+                </td>
                 <td className="border border-slate-800">{item.group}</td>
                 <td className="border border-slate-800" ><button onClick={()=>handleDelete(index)} >DELETE</button></td>
               </tr>
