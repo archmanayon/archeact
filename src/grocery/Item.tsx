@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 interface GroceryObject{
-  name:String;
+  itemName:String;
   quantity: Number;
   amount: Number;
   group:String;
@@ -14,7 +14,7 @@ const Item = ({onAdd}:Props) => {
   // using useRef
   // const nameRef = useRef<HTMLInputElement>(null);
   const [groceryItem, setGroceryItem] = useState({
-    name: "",
+    itemName: "",
     quantity: '',
     amount: '',
     group:""
@@ -30,12 +30,12 @@ const Item = ({onAdd}:Props) => {
           // console.log(nameRef.current?.value);
           
         }}>
-        <label htmlFor="name"> Item </label>
+        <label htmlFor="itemName"> Item </label>
         <input          
-          name="name"
-          value={groceryItem.name}
+          name="itemName"
+          value={groceryItem.itemName}
           onChange={(e) =>
-            setGroceryItem({ ...groceryItem, name: e.target.value })
+            setGroceryItem({ ...groceryItem, itemName: e.target.value })
           }
           // using useRef
           // ref={nameRef}
