@@ -24,9 +24,9 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {list
-            .filter((anItem, index) => index !== 0)
-            .filter((entry)=> entry.group === (dropSelect !== "" ? dropSelect: ""))
+          {list            
+            // .filter((entry)=> entry.group === (dropSelect !== "" ? dropSelect: ""))
+            .filter((entry)=> dropSelect !== "" ? (entry.group===dropSelect) : (entry.group!==dropSelect))
             .map((item, index) => (
               <tr
                 key={index}

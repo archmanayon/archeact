@@ -28,7 +28,7 @@ function App() {
         {/* <Item onAdd = {onAdd}/> */}
         <Item2 onAdd={onAdd} />
         <ListOfItems
-          list={list}
+          list={list.filter((anItem, index) => index !== 0)}
           handleDelete={(selectIndex) =>
             setList(list.filter((anItem, index) => index !== selectIndex))
           }
