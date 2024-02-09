@@ -4,10 +4,23 @@ import Group from "./Group";
 
 interface Props {
   list: { itemName: string; quantity: number; amount: number; group: string }[];
+
   handleDelete?: (selectIndex: number) => void;
 }
 const ListOfItems = ({ list, handleDelete }: Props) => {
   const [dropSelect, setDropSelect] = useState("");
+  const [groupSum, setGroupSum] = useState({sum:0});
+  // const AddbyGroup = (amount:number)=>setGroupSum(groupSum + amount);
+  const filterList = list.filter((entry) =>
+    dropSelect !== "" ? entry.group === dropSelect : entry.group !== dropSelect
+  );
+  const summIng = ()=>  
+    { 
+      setGroupSum({...groupSum,sum: 0}) ;
+      filterList.forEach(item => setGroupSum({...groupSum,sum: + item.amount}));
+    };
+;
+
   return (
     <>
       <table className="w-full whitespace-nowrap border-collapse border border-slate-500">
@@ -18,16 +31,24 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
             <th className="border border-slate-600">amount</th>
             <th className="border border-slate-600">
               group
-              <Group onSelected={(e) => setDropSelect(e.target.value)} />{" "}
+              <Group onSelected={(e) => {
+                setDropSelect(e.target.value);
+                summIng();
+                }} />{" "}
             </th>
             <th />
           </tr>
         </thead>
         <tbody>
-          {list            
-            // .filter((entry)=> entry.group === (dropSelect !== "" ? dropSelect: ""))
-            .filter((entry)=> dropSelect !== "" ? (entry.group===dropSelect) : (entry.group!==dropSelect))
+          {filterList
+            // if no filter selected. show all
+            // .filter((entry) =>
+            //   dropSelect !== ""
+            //     ? entry.group === dropSelect
+            //     : entry.group !== dropSelect
+            // )
             .map((item, index) => (
+              
               <tr
                 key={index}
                 className="focus:outline-none h-16 border border-gray-100 rounded"
@@ -45,6 +66,11 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
                 </td>
               </tr>
             ))}
+          <tr>
+            <td></td>
+            <td>total</td>
+            <td>{groupSum.sum}</td>
+          </tr>
         </tbody>
       </table>
     </>

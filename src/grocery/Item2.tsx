@@ -8,7 +8,9 @@ const Item2 = ({onAdd}:Props) => {
   const { register, handleSubmit } = useForm();
   return (
     <div>
-      <form onSubmit={handleSubmit((data) => {console.log(data); onAdd(data)})}>
+      <form onSubmit={handleSubmit((data) => {
+        // console.log(data);
+        onAdd(data)})}>
         <label htmlFor="itemName"> Item </label>
         <input {...register("itemName")} />
         <br />
