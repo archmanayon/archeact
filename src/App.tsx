@@ -4,24 +4,38 @@ import ListOfItems from "./grocery/ListOfItems";
 import Item from "./grocery/Item";
 import Increment from "./component/Increment";
 import Item2 from "./grocery/Item2";
+import { FieldValues } from "react-hook-form";
 
-function App() { 
+function App() {
+  const [list, setList] = useState([
+    { itemName: "", quantity: 0, amount: 0, group: "" },
+  ]);
 
-  const [list, setList] = useState([{ itemName: '', quantity: '', amount: '', group:'' }]);  
+  const onAdd = (item: FieldValues) =>
+    setList([
+      ...list,
+      {
+        itemName: item.itemName,
+        quantity: item.quantity,
+        amount: item.amount,
+        group: item.group,
+      },
+    ]);
 
-  const onAdd = (item) => setList([...list,{itemName:item.itemName, quantity:item.quantity, amount:item.amount, group:item.group}]);    
-  
   return (
     <div className="App">
-       
-        <div>
-          {/* <Item onAdd = {onAdd}/> */}
-          <Item2 onAdd ={onAdd}/>
-          <ListOfItems list={list} handleDelete={(selectIndex)=> setList(list.filter((anItem, index)=> index !==selectIndex))}/>
-        </div>
-        
+      <div>
+        {/* <Item onAdd = {onAdd}/> */}
+        <Item2 onAdd={onAdd} />
+        <ListOfItems
+          list={list}
+          handleDelete={(selectIndex) =>
+            setList(list.filter((anItem, index) => index !== selectIndex))
+          }
+        />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

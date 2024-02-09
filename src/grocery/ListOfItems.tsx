@@ -1,18 +1,10 @@
 import AmountAdjust from "./AmountAdjust";
 
 interface Props {
-  list: [
-    {
-      itemName: String;
-      quantity: Number;
-      amount: Number;
-      group: String;
-    }
-  ];
-  handleDelete?:(selectIndex:Number)=>void;
+  list: { itemName: string; quantity: number; amount: number; group: string }[];
+  handleDelete?: (selectIndex: number) => void;
 }
 const ListOfItems = ({ list, handleDelete }: Props) => {
-  
   return (
     <>
       <table className="w-full whitespace-nowrap border-collapse border border-slate-500">
@@ -28,18 +20,22 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
         <tbody>
           {list
             .filter((anItem, index) => index !== 0)
-            .map((item, index) => (            
+            .map((item, index) => (
               <tr
                 key={index}
                 className="focus:outline-none h-16 border border-gray-100 rounded"
               >
                 <td className="border border-slate-800">{item.itemName}</td>
-                <td className="border border-slate-800">{item.quantity.toString()}</td>
                 <td className="border border-slate-800">
-                  <AmountAdjust orig={item.amount}/>
+                  {item.quantity.toString()}
+                </td>
+                <td className="border border-slate-800">
+                  <AmountAdjust orig={item.amount} />
                 </td>
                 <td className="border border-slate-800">{item.group}</td>
-                <td className="border border-slate-800" ><button onClick={()=>handleDelete(index)} >DELETE</button></td>
+                <td className="border border-slate-800">
+                  <button onClick={() => handleDelete(index)}>DELETE</button>
+                </td>
               </tr>
             ))}
         </tbody>
