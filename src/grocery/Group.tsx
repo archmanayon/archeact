@@ -1,6 +1,6 @@
 import { useState } from "react"
 interface Props{
-  onSelected:(e:React.ChangeEvent<HTMLInputElement>)=>void;
+  onSelected:(e:React.ChangeEvent<HTMLSelectElement>)=>void;
 }
 
 

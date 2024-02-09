@@ -8,19 +8,13 @@ interface Props {
   handleDelete?: (selectIndex: number) => void;
 }
 const ListOfItems = ({ list, handleDelete }: Props) => {
-  const [dropSelect, setDropSelect] = useState("");
-  const [groupSum, setGroupSum] = useState({sum:0});
-  // const AddbyGroup = (amount:number)=>setGroupSum(groupSum + amount);
+  const [dropSelect, setDropSelect] = useState("");  
   const filterList = list.filter((entry) =>
     dropSelect !== "" ? entry.group === dropSelect : entry.group !== dropSelect
   );
-  const summIng = ()=>  
-    { 
-      setGroupSum({...groupSum,sum: 0}) ;
-      filterList.forEach(item => setGroupSum({...groupSum,sum: + item.amount}));
-    };
-;
 
+  const sum = filterList.reduce((total, item) => total + Number(item.amount), 0);
+ 
   return (
     <>
       <table className="w-full whitespace-nowrap border-collapse border border-slate-500">
@@ -31,24 +25,18 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
             <th className="border border-slate-600">amount</th>
             <th className="border border-slate-600">
               group
-              <Group onSelected={(e) => {
-                setDropSelect(e.target.value);
-                summIng();
-                }} />{" "}
+              <Group
+                onSelected={(e) => {
+                  setDropSelect(e.target.value);
+                }}
+              />{" "}
             </th>
             <th />
           </tr>
         </thead>
         <tbody>
           {filterList
-            // if no filter selected. show all
-            // .filter((entry) =>
-            //   dropSelect !== ""
-            //     ? entry.group === dropSelect
-            //     : entry.group !== dropSelect
-            // )
             .map((item, index) => (
-              
               <tr
                 key={index}
                 className="focus:outline-none h-16 border border-gray-100 rounded"
@@ -62,14 +50,14 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
                 </td>
                 <td className="border border-slate-800">{item.group}</td>
                 <td className="border border-slate-800">
-                  <button onClick={() => handleDelete(index)}>DELETE</button>
+                  <button onClick={() => handleDelete? handleDelete(index): null}>DELETE</button>
                 </td>
               </tr>
             ))}
           <tr>
             <td></td>
             <td>total</td>
-            <td>{groupSum.sum}</td>
+            <td>{sum}</td>
           </tr>
         </tbody>
       </table>
