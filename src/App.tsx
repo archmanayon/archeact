@@ -17,7 +17,7 @@ function App() {
       {
         itemName: item.itemName,
         quantity: item.quantity,
-        amount: item.amount,
+        amount: Number(item.amount) * Number(item.quantity),
         group: item.group,
       },
     ]);
