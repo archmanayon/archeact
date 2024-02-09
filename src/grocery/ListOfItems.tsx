@@ -1,10 +1,13 @@
+import { useState } from "react";
 import AmountAdjust from "./AmountAdjust";
+import Group from "./Group";
 
 interface Props {
   list: { itemName: string; quantity: number; amount: number; group: string }[];
   handleDelete?: (selectIndex: number) => void;
 }
 const ListOfItems = ({ list, handleDelete }: Props) => {
+  const [dropSelect, setDropSelect] = useState("");
   return (
     <>
       <table className="w-full whitespace-nowrap border-collapse border border-slate-500">
@@ -13,13 +16,17 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
             <th className="border border-slate-600">name</th>
             <th className="border border-slate-600">quantity</th>
             <th className="border border-slate-600">amount</th>
-            <th className="border border-slate-600">group</th>
+            <th className="border border-slate-600">
+              group
+              <Group onSelected={(e) => setDropSelect(e.target.value)} />{" "}
+            </th>
             <th />
           </tr>
         </thead>
         <tbody>
           {list
             .filter((anItem, index) => index !== 0)
+            .filter((entry)=> entry.group === (dropSelect !== "" ? dropSelect: ""))
             .map((item, index) => (
               <tr
                 key={index}
