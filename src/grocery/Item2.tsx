@@ -17,8 +17,8 @@ const Item2 = ({onAdd}:Props) => {
         <label htmlFor="quantity"> How Many </label>
         <input {...register("quantity")} />
         <br />
-        <label htmlFor="amount"> How Much </label>
-        <input {...register("amount")} />
+        <label htmlFor="price"> How Much </label>
+        <input {...register("price")} />
         <br />
         <label htmlFor="group">Select Group:</label>
         <select

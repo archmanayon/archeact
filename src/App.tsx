@@ -8,7 +8,7 @@ import { FieldValues } from "react-hook-form";
 
 function App() {
   const [list, setList] = useState([
-    { itemName: "", quantity: 0, amount: 0, group: "" },
+    { itemName: "", quantity: 0, price: 0, totalAmount:0, group: "" },
   ]);
 
   const onAdd = (item: FieldValues) =>
@@ -17,7 +17,8 @@ function App() {
       {
         itemName: item.itemName,
         quantity: item.quantity,
-        amount: Number(item.amount) * Number(item.quantity),
+        price: Number(item.price),
+        totalAmount: Number(item.price) * Number(item.quantity),
         group: item.group,
       },
     ]);
