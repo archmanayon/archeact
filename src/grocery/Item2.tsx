@@ -5,20 +5,40 @@ import { FieldValues, Form, useForm } from "react-hook-form";
   }
 
 const Item2 = ({onAdd}:Props) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState:{errors} } = useForm();
+  // console.log(formState.errors['itemName']?.type);
+  // prepare the errors long way without formState destructured
+  // const itemNameErrors = formState.errors['itemName']?.type ?? null;
+  // const quantityErrors = formState.errors['quantity']?.type ?? null;
+  // const priceErrors = formState.errors['price']?.type ?? null;
+  // console.log(itemNameErrors);
   return (
     <div>
       <form onSubmit={handleSubmit((data) => {
         // console.log(data);
-        onAdd(data)})}>
+        
+        onAdd(data);})}>
         <label htmlFor="itemName"> Item </label>
-        <input {...register("itemName")} />
+        <input {...register("itemName", {required: true, minLength: 3})} />
+        {/* display errors */}
+        <>{
+          errors.itemName?.type =="required" ?
+          "Can't Be Blank":
+          (errors.itemName?.type == "minLength"? "Must be more than 3 characters" : null)
+        }</>
+
         <br />
         <label htmlFor="quantity"> How Many </label>
-        <input {...register("quantity")} />
+        <input {...register("quantity", {required: true})} />
+        {/* display errors */}
+        <>{errors.quantity?.type === "required" ? "Can't Be Blank":null}</>
+
         <br />
         <label htmlFor="price"> How Much </label>
-        <input {...register("price")} />
+        <input {...register("price", {required: true})} />
+        {/* display errors */}
+        <>{errors.price?.type === "required" ? "Can't Be Blank":null}</>
+
         <br />
         <label htmlFor="group">Select Group:</label>
         <select
@@ -31,6 +51,7 @@ const Item2 = ({onAdd}:Props) => {
         </select>
         <button>Add</button>
       </form>
+      
     </div>
   );
 };
