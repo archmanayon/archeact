@@ -3,6 +3,7 @@ import AmountAdjust from "./AmountAdjust";
 import Group from "./Group";
 
 interface Props {
+  category : string[];
   list: {
     itemName: string;
     quantity: number;
@@ -13,7 +14,7 @@ interface Props {
 
   handleDelete?: (selectIndex: number) => void;
 }
-const ListOfItems = ({ list, handleDelete }: Props) => {
+const ListOfItems = ({ category, list, handleDelete }: Props) => {
   const [dropSelect, setDropSelect] = useState("");
   const filteredList = list.filter((selectedList) =>
     dropSelect !== ""
@@ -37,7 +38,7 @@ const ListOfItems = ({ list, handleDelete }: Props) => {
             <th className="border border-slate-600">Amount</th>
             <th className="border border-slate-600">
               group              
-              <Group
+              <Group category = {category}
                 onSelected={(e) => {
                   setDropSelect(e.target.value);
                 }}

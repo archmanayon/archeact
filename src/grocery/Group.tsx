@@ -1,10 +1,11 @@
 import { useState } from "react"
 interface Props{
+  category : string[];
   onSelected:(e:React.ChangeEvent<HTMLSelectElement>)=>void;
 }
 
 
-const Group = ({onSelected}:Props) => {
+const Group = ({category, onSelected}:Props) => {
   
   return (
     <div>
@@ -12,9 +13,7 @@ const Group = ({onSelected}:Props) => {
         onChange={(e)=>onSelected(e)}
       >
         <option value="">All</option>
-        <option value="Weapons">Weapons</option>
-        <option value="Food">Food</option>
-        <option value="Others">Others</option>
+        {category.map((categ)=> <option key={categ} value={categ}> {categ} </option>)}
       </select>
     </div>
   )

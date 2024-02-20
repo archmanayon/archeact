@@ -1,10 +1,11 @@
 import { FieldValues, Form, useForm } from "react-hook-form";
 
-  interface Props{    
+  interface Props{
+      category : string[];
       onAdd : ({}:FieldValues) => void;
   }
 
-const Item2 = ({onAdd}:Props) => {
+const Item2 = ({category, onAdd}:Props) => {
   const { register, handleSubmit, formState:{errors, isValid} } = useForm();
   // console.log(formState.errors['itemName']?.type);
   // prepare the errors long way without formState destructured
@@ -40,14 +41,13 @@ const Item2 = ({onAdd}:Props) => {
         <>{errors.price?.type === "required" ? "Can't Be Blank":null}</>
 
         <br />
+       
         <label htmlFor="group">Select Group:</label>
         <select
           {...register("group")}
         >
           <option value="">Select...</option>
-          <option value="Weapons">Weapons</option>
-          <option value="Food">Food</option>
-          <option value="Others">Others</option>
+          {category.map((categ)=><option key={categ} value={categ}> {categ}</option>)}
         </select>
         <button disabled={!isValid} type="submit">Add</button>
       </form>

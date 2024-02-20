@@ -11,6 +11,8 @@ function App() {
     { itemName: "", quantity: 0, price: 0, totalAmount:0, group: "" },
   ]);
 
+  const [category, SetCategory]= useState(["Weapon", "Food", "others"]);
+
   const onAdd = (item: FieldValues) =>
     setList([
       ...list,
@@ -27,8 +29,9 @@ function App() {
     <div className="App">
       <div>
         {/* <Item onAdd = {onAdd}/> */}
-        <Item2 onAdd={onAdd} />
+        <Item2 category={category} onAdd={onAdd}/>
         <ListOfItems
+          category={category}
           list={list.filter((anItem, index) => index !== 0)}
           handleDelete={(selectIndex) =>
             setList(list.filter((anItem, index) => index !== selectIndex))
