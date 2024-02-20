@@ -5,7 +5,7 @@ import { FieldValues, Form, useForm } from "react-hook-form";
   }
 
 const Item2 = ({onAdd}:Props) => {
-  const { register, handleSubmit, formState:{errors} } = useForm();
+  const { register, handleSubmit, formState:{errors, isValid} } = useForm();
   // console.log(formState.errors['itemName']?.type);
   // prepare the errors long way without formState destructured
   // const itemNameErrors = formState.errors['itemName']?.type ?? null;
@@ -49,7 +49,7 @@ const Item2 = ({onAdd}:Props) => {
           <option value="Food">Food</option>
           <option value="Others">Others</option>
         </select>
-        <button>Add</button>
+        <button disabled={!isValid} type="submit">Add</button>
       </form>
       
     </div>
