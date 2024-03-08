@@ -1,12 +1,16 @@
 import { FieldValues, Form, useForm } from "react-hook-form";
 
-  interface Props{
-      category : string[];
-      onAdd : ({}:FieldValues) => void;
-  }
+interface Props {
+  category: string[];
+  onAdd: ({}: FieldValues) => void;
+}
 
-const Item2 = ({category, onAdd}:Props) => {
-  const { register, handleSubmit, formState:{errors, isValid} } = useForm();
+const Item2 = ({ category, onAdd }: Props) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm();
   // console.log(formState.errors['itemName']?.type);
   // prepare the errors long way without formState destructured
   // const itemNameErrors = formState.errors['itemName']?.type ?? null;
@@ -15,43 +19,76 @@ const Item2 = ({category, onAdd}:Props) => {
   // console.log(itemNameErrors);
   return (
     <div>
-      <form onSubmit={handleSubmit((data) => {
-        // console.log(data);
-        
-        onAdd(data);})}>
+      <form
+        onSubmit={handleSubmit((data) => {
+          // console.log(data);
+
+          onAdd(data);
+        })}
+      >
         <label htmlFor="itemName"> Item </label>
-        <input {...register("itemName", {required: true, minLength: 3})} />
+        <input {...register("itemName", { required: true, minLength: 3 })} />
         {/* display errors */}
-        <>{
-          errors.itemName?.type =="required" ?
-          "Can't Be Blank":
-          (errors.itemName?.type == "minLength"? "Must be more than 3 characters" : null)
-        }</>
+        {errors.itemName?.type == "required"
+          ? "Can't Be Blank"
+          : errors.itemName?.type == "minLength"
+          ? "Must be more than 3 characters"
+          : null}
 
         <br />
         <label htmlFor="quantity"> How Many </label>
-        <input {...register("quantity", {required: true})} />
+        <input
+          {...register("quantity", {
+            required: true,
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "Please enter a valid number",
+            },
+          })}
+        />
         {/* display errors */}
-        <>{errors.quantity?.type === "required" ? "Can't Be Blank":null}</>
+        <>
+          {errors.quantity?.type === "required"
+            ? "Can't Be Blank"
+            : errors.quantity?.type === "pattern"
+            ? "Please enter a valid number"
+            : null}
+        </>
 
         <br />
         <label htmlFor="price"> How Much </label>
-        <input {...register("price", {required: true})} />
+        <input
+          {...register("price", {
+            required: true,
+            pattern: {
+              value: /^[0-9]+$/,
+              message: "Please enter a valid number",
+            },
+          })}
+        />
         {/* display errors */}
-        <>{errors.price?.type === "required" ? "Can't Be Blank":null}</>
+        <>
+          {errors.price?.type === "required"
+            ? "Can't Be Blank"
+            : errors.price?.type === "pattern"
+            ? "Please enter a valid number"
+            : null}
+        </>
 
         <br />
-       
+
         <label htmlFor="group">Select Group:</label>
-        <select
-          {...register("group")}
-        >
+        <select {...register("group")}>
           <option value="">Select...</option>
-          {category.map((categ)=><option key={categ} value={categ}> {categ}</option>)}
+          {category.map((categ) => (
+            <option key={categ} value={categ}>
+              {" "}
+              {categ}
+            </option>
+          ))}
         </select>
-        <button disabled={!isValid} type="submit">Add</button>
+        <button type="submit">Add</button>
       </form>
-      
     </div>
   );
 };
