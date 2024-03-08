@@ -87,7 +87,9 @@ const Item2 = ({ category, onAdd }: Props) => {
             </option>
           ))}
         </select>
-        <button type="submit">Add</button>
+        <button disabled={!isValid} type="submit">
+          Add
+        </button>
       </form>
     </div>
   );
