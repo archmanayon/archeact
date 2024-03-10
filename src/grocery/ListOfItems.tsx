@@ -17,11 +17,17 @@ interface Props {
 }
 const ListOfItems = ({ category, list, handleDelete }: Props) => {
   const [dropSelect, setDropSelect] = useState("");
-  const filteredList = list.filter((selectedList) =>
-    dropSelect !== ""
-      ? selectedList.group === dropSelect
-      : selectedList.group !== dropSelect
-  );
+  // 01 first way to filter based on selected category
+  // const filteredList = list.filter((eachItem) =>
+  //   dropSelect !== ""
+  //     ? eachItem.group === dropSelect
+  //     : eachItem.group !== dropSelect
+  // );
+
+  // 02 second way to filter based on selected category
+  const filteredList = dropSelect
+    ? list.filter((eachItem) => eachItem.group === dropSelect)
+    : list;
 
   // const sum = filteredList.reduce((total, item) => total + Number(item.totalAmount),0);
   const sum = filteredList
