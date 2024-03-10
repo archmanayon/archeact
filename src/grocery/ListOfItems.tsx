@@ -5,6 +5,7 @@ import Group from "./Group";
 interface Props {
   category: string[];
   list: {
+    id: number;
     itemName: string;
     quantity: number;
     price: number;
@@ -12,7 +13,7 @@ interface Props {
     group: string;
   }[];
 
-  handleDelete?: (selectIndex: number) => void;
+  handleDelete?: (selectId: number) => void;
 }
 const ListOfItems = ({ category, list, handleDelete }: Props) => {
   const [dropSelect, setDropSelect] = useState("");
@@ -49,9 +50,9 @@ const ListOfItems = ({ category, list, handleDelete }: Props) => {
           </tr>
         </thead>
         <tbody>
-          {filteredList.map((item, index) => (
+          {filteredList.map((item) => (
             <tr
-              key={index}
+              key={item.id}
               className="focus:outline-none h-16 border border-gray-100 rounded"
             >
               <td className="border border-slate-800">{item.itemName}</td>
@@ -67,7 +68,8 @@ const ListOfItems = ({ category, list, handleDelete }: Props) => {
               <td className="border border-slate-800">{item.group}</td>
               <td className="border border-slate-800">
                 <button
-                  onClick={() => (handleDelete ? handleDelete(index) : null)}
+                  onClick={() => (handleDelete ? handleDelete(item.id) : null)}
+                  // onClick={() => console.log(item.id)}
                 >
                   DELETE
                 </button>

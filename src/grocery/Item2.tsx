@@ -9,6 +9,7 @@ const Item2 = ({ category, onAdd }: Props) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm();
   // console.log(formState.errors['itemName']?.type);
@@ -22,8 +23,8 @@ const Item2 = ({ category, onAdd }: Props) => {
       <form
         onSubmit={handleSubmit((data) => {
           // console.log(data);
-
           onAdd(data);
+          reset();
         })}
       >
         <label htmlFor="itemName"> Item </label>
