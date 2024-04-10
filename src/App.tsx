@@ -5,6 +5,8 @@ import Item from "./grocery/Item";
 import Increment from "./component/Increment";
 import Item2 from "./grocery/Item2";
 import { FieldValues } from "react-hook-form";
+import Counter from "./component/Counter";
+import Tasks from "./reducers/Tasks";
 
 function App() {
   const [list, setList] = useState([
@@ -38,6 +40,12 @@ function App() {
             setList(list.filter((item) => item.id !== selectId))
           }
         />
+        <div className="">
+          <Counter />
+        </div>
+        <div>
+          <Tasks />
+        </div>
       </div>
     </div>
   );
