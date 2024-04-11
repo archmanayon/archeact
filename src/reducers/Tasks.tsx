@@ -3,15 +3,22 @@ import Task from "../component/Task";
 
 interface TaskScript {
   type: string;
-  payload: { name: string };
+  payload: { name: string; completed: boolean };
 }
 
 const ACTION = { ADDTASK: "addTask" };
 
-function task_func(tasks: string, action: TaskScript) {
+function task_func(tasks: {}[], action: TaskScript) {
   switch (action.type) {
     case ACTION.ADDTASK:
-      return [...tasks, action.payload.name];
+      return [
+        ...tasks,
+        {
+          id: Date.now(),
+          task: action.payload.name,
+          completed: action.payload.completed,
+        },
+      ];
     default:
       return tasks;
   }
@@ -29,7 +36,10 @@ const Tasks = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch({ type: "addTask", payload: { name: task_name } });
+            dispatch({
+              type: "addTask",
+              payload: { name: task_name, completed: false },
+            });
             setTask_name("");
           }}
         >
@@ -41,9 +51,7 @@ const Tasks = () => {
         </form>
       </div>
       <div>
-        {tasks.map((task) => {
-          return <Task task={task} key={task} />;
-        })}
+        <Task tasks={tasks} />
       </div>
     </>
   );
