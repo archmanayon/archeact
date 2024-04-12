@@ -6,7 +6,7 @@ interface TaskScript {
   payload: { name: string; completed: boolean };
 }
 
-const ACTION = { ADDTASK: "addTask", MARKTASK: "markTask" };
+export const ACTION = { ADDTASK: "addTask", MARKTASK: "markTask" };
 
 function task_func(tasks: {}[], action: TaskScript) {
   switch (action.type) {
@@ -22,7 +22,7 @@ function task_func(tasks: {}[], action: TaskScript) {
     case ACTION.MARKTASK:
       tasks.map((task) => {
         if (task.id === action.payload.id) {
-          return { ...task, completed: true };
+          return { ...task, completed: !task.completed };
         }
         return task;
       });
@@ -58,7 +58,31 @@ const Tasks = () => {
         </form>
       </div>
       <div>
-        <Task tasks={tasks} dispatch={dispatch} />
+        <table>
+          <tbody>
+            <tr>
+              <th className="border-2">id</th>
+              <th className="border-2">task</th>
+              <th className="border-2">status</th>
+              <th className="border-2">mark</th>
+              <th className="border-2">delete</th>
+            </tr>
+            {tasks?.map((task, index) => {
+              return (
+                <Task
+                  task={task}
+                  key={index}
+                  dispatch={(i: number) => {
+                    dispatch({
+                      type: "markTask",
+                      payload: { id: i?.id },
+                    });
+                  }}
+                />
+              );
+            })}
+          </tbody>
+        </table>
       </div>
     </>
   );
