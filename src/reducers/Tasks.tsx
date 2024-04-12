@@ -1,14 +1,23 @@
-import { useReducer, useState } from "react";
-import Task from "../component/Task";
+import { useReducer, useState } from 'react'
+import Task from '../component/Task'
 
-interface TaskScript {
-  type: string;
-  payload: { name: string; completed: boolean };
+type Task = {
+  id: number
+  task: string
+  completed: boolean
 }
 
-export const ACTION = { ADDTASK: "addTask", MARKTASK: "markTask" };
+interface TaskScript {
+  type: string
+  payload: { name: string; completed: boolean }
+}
 
-function task_func(tasks: {}[], action: TaskScript) {
+export const ACTION = {
+  ADDTASK: 'addTask',
+  MARKTASK: 'markTask',
+}
+
+function taskReducer(tasks: Task[], action: TaskScript) {
   switch (action.type) {
     case ACTION.ADDTASK:
       return [
@@ -18,41 +27,38 @@ function task_func(tasks: {}[], action: TaskScript) {
           task: action.payload.name,
           completed: action.payload.completed,
         },
-      ];
-    case ACTION.MARKTASK:
-      tasks.map((task) => {
-        if (task.id === action.payload.id) {
-          console.log({
-            ...task,
-            completed: action.payload.completed,
-          });
-          //   return { ...task, completed: true };
-        } else {
-          return task;
-        }
-      });
+      ]
+    // case ACTION.MARKTASK:
+    //   tasks.map((task) => {
+    //     if (task.id === action.payload.id) {
+    //       return { ...task, completed: !task.completed };
+    //     } else {
+    //       return task;
+    //     }
+    //   });
+
     default:
-      return tasks;
+      return tasks
   }
 }
 
 const Tasks = () => {
-  const [task_name, setTask_name] = useState("");
+  const [task_name, setTask_name] = useState('')
 
-  const [tasks, dispatch] = useReducer(task_func, []);
+  const [tasks, dispatch] = useReducer(taskReducer, [])
+  console.log(tasks)
 
-  console.log(tasks);
   return (
     <>
       <div>
         <form
           onSubmit={(e) => {
-            e.preventDefault();
+            e.preventDefault()
             dispatch({
-              type: "addTask",
+              type: 'addTask',
               payload: { name: task_name, completed: false },
-            });
-            setTask_name("");
+            })
+            setTask_name('')
           }}
         >
           <input
@@ -72,29 +78,54 @@ const Tasks = () => {
               <th className="border-2">mark</th>
               <th className="border-2">delete</th>
             </tr>
-            {tasks?.map((task, index) => {
+            {tasks?.map((task: any, index: number) => {
               return (
-                <Task
-                  task={task}
-                  key={index}
-                  dispatch={() => {
-                    dispatch({
-                      type: "markTask",
-                      payload: {
-                        id: task.id,
-                        name: task.task,
-                        completed: true,
-                      },
-                    });
-                  }}
-                />
-              );
+                <tr key={index}>
+                  <td className="border-2">{task.id}</td>
+                  <td className="border-2">{task.task}</td>
+                  <td className="border-2">
+                    {' '}
+                    {task.completed ? 'naa' : 'wala'}
+                  </td>
+                  <td className="border-2">
+                    <button
+                      onClick={() => {
+                        dispatch({
+                          type: 'markTask',
+                          payload: {
+                            id: task.id,
+                          },
+                        })
+                      }}
+                    >
+                      mark
+                    </button>
+                  </td>
+                  <td className="border-2">
+                    <button>delete </button>
+                  </td>
+                </tr>
+                // <Task
+                //   task={task}
+                //   key={index}
+                //   dispatch={() => {
+                //     dispatch({
+                //       type: "markTask",
+                //       payload: {
+                //         id: task.id,
+                //         name: task.task,
+                //         completed: true,
+                //       },
+                //     });
+                //   }}
+                // />
+              )
             })}
           </tbody>
         </table>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Tasks;
+export default Tasks
