@@ -22,9 +22,14 @@ function task_func(tasks: {}[], action: TaskScript) {
     case ACTION.MARKTASK:
       tasks.map((task) => {
         if (task.id === action.payload.id) {
-          return { ...task, completed: !task.completed };
+          console.log({
+            ...task,
+            completed: action.payload.completed,
+          });
+          //   return { ...task, completed: true };
+        } else {
+          return task;
         }
-        return task;
       });
     default:
       return tasks;
@@ -72,10 +77,14 @@ const Tasks = () => {
                 <Task
                   task={task}
                   key={index}
-                  dispatch={(i: number) => {
+                  dispatch={() => {
                     dispatch({
                       type: "markTask",
-                      payload: { id: i?.id },
+                      payload: {
+                        id: task.id,
+                        name: task.task,
+                        completed: true,
+                      },
                     });
                   }}
                 />
