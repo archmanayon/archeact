@@ -1,41 +1,42 @@
 import { useReducer, useState } from 'react'
-import Task from '../component/Task'
 
 type Task = {
-  id: number
-  task: string
-  completed: boolean
+  id?: number
+  taskName?: string
+  completed?: boolean
 }
 
 interface TaskScript {
   type: string
-  payload: { name: string; completed: boolean }
+  payload: Task
 }
 
 export const ACTION = {
-  ADDTASK: 'addTask',
-  MARKTASK: 'markTask',
+  ADD_TASK: 'addTask',
+  MARK_TASK: 'markTask',
+  DELETE_TASK: 'deleteTask',
 }
 
 function taskReducer(tasks: Task[], action: TaskScript) {
   switch (action.type) {
-    case ACTION.ADDTASK:
+    case ACTION.ADD_TASK:
       return [
         ...tasks,
         {
           id: Date.now(),
-          task: action.payload.name,
+          taskName: action.payload.taskName,
           completed: action.payload.completed,
         },
       ]
-    // case ACTION.MARKTASK:
-    //   tasks.map((task) => {
-    //     if (task.id === action.payload.id) {
-    //       return { ...task, completed: !task.completed };
-    //     } else {
-    //       return task;
-    //     }
-    //   });
+    case ACTION.MARK_TASK:
+      return tasks.map((t) => {
+        if (t.id === action.payload.id) {
+          return { ...t, completed: !t.completed }
+        }
+        return t
+      })
+    case ACTION.DELETE_TASK:
+      return tasks.filter((t) => t.id !== action.payload.id)
 
     default:
       return tasks
@@ -43,7 +44,7 @@ function taskReducer(tasks: Task[], action: TaskScript) {
 }
 
 const Tasks = () => {
-  const [task_name, setTask_name] = useState('')
+  const [taskName, setTaskName] = useState('')
 
   const [tasks, dispatch] = useReducer(taskReducer, [])
   console.log(tasks)
@@ -56,15 +57,15 @@ const Tasks = () => {
             e.preventDefault()
             dispatch({
               type: 'addTask',
-              payload: { name: task_name, completed: false },
+              payload: { taskName: taskName, completed: false },
             })
-            setTask_name('')
+            setTaskName('')
           }}
         >
           <input
             type="text"
-            value={task_name}
-            onChange={(i) => setTask_name(i.target.value)}
+            value={taskName}
+            onChange={(i) => setTaskName(i.target.value)}
           />
         </form>
       </div>
@@ -78,11 +79,11 @@ const Tasks = () => {
               <th className="border-2">mark</th>
               <th className="border-2">delete</th>
             </tr>
-            {tasks?.map((task: any, index: number) => {
+            {tasks?.map((task: Task, index: number) => {
               return (
                 <tr key={index}>
                   <td className="border-2">{task.id}</td>
-                  <td className="border-2">{task.task}</td>
+                  <td className="border-2">{task.taskName}</td>
                   <td className="border-2">
                     {' '}
                     {task.completed ? 'naa' : 'wala'}
@@ -102,7 +103,16 @@ const Tasks = () => {
                     </button>
                   </td>
                   <td className="border-2">
-                    <button>delete </button>
+                    <button
+                      onClick={() =>
+                        dispatch({
+                          type: 'deleteTask',
+                          payload: { id: task.id },
+                        })
+                      }
+                    >
+                      delete{' '}
+                    </button>
                   </td>
                 </tr>
                 // <Task
