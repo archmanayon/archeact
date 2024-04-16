@@ -1,25 +1,43 @@
-interface Task {
-  id: number;
-  task: string;
-  completed: boolean;
-  dispatch: () => void;
+import { Task_type } from '../reducers/Tasks'
+
+type All_children = {
+  task: Task_type
+  doDispatch: ({}) => void
 }
-const Task = ({ task, dispatch }: Task) => {
+const Task = ({ task, doDispatch }: All_children) => {
   return (
     <>
       <tr>
         <td className="border-2">{task.id}</td>
-        <td className="border-2">{task.task}</td>
-        <td className="border-2">{task.completed ? "done" : "wala pa"}</td>
+        <td className="border-2">{task.taskName}</td>
+        <td className="border-2"> {task.completed ? 'naa' : 'wala'}</td>
         <td className="border-2">
-          <button onClick={() => dispatch()}>mark</button>
+          <button
+            onClick={() =>
+              doDispatch({
+                type: 'markTask',
+                id: task.id,
+              })
+            }
+          >
+            mark
+          </button>
         </td>
         <td className="border-2">
-          <button>delete </button>
+          <button
+            onClick={() =>
+              doDispatch({
+                type: 'deleteTask',
+                id: task.id,
+              })
+            }
+          >
+            delete{' '}
+          </button>
         </td>
       </tr>
     </>
-  );
-};
+  )
+}
 
-export default Task;
+export default Task

@@ -1,14 +1,15 @@
 import { useReducer, useState } from 'react'
+import Task from '../component/Task'
 
-type Task = {
+export type Task_type = {
   id?: number
   taskName?: string
   completed?: boolean
 }
 
 interface TaskScript {
-  type: string
-  payload: Task
+  type?: string
+  payload: Task_type
 }
 
 export const ACTION = {
@@ -17,7 +18,7 @@ export const ACTION = {
   DELETE_TASK: 'deleteTask',
 }
 
-function taskReducer(tasks: Task[], action: TaskScript) {
+function taskReducer(tasks: Task_type[], action: TaskScript) {
   switch (action.type) {
     case ACTION.ADD_TASK:
       return [
@@ -79,56 +80,52 @@ const Tasks = () => {
               <th className="border-2">mark</th>
               <th className="border-2">delete</th>
             </tr>
-            {tasks?.map((task: Task, index: number) => {
+            {tasks?.map((task: Task_type, index) => {
+              // <tr key={index}>
+              //   <td className="border-2">{task.id}</td>
+              //   <td className="border-2">{task.taskName}</td>
+              //   <td className="border-2">
+              //     {' '}
+              //     {task.completed ? 'naa' : 'wala'}
+              //   </td>
+              //   <td className="border-2">
+              //     <button
+              //       onClick={() => {
+              //         dispatch({
+              //           type: 'markTask',
+              //           payload: {
+              //             id: task.id,
+              //           },
+              //         })
+              //       }}
+              //     >
+              //       mark
+              //     </button>
+              //   </td>
+              //   <td className="border-2">
+              //     <button
+              //       onClick={() =>
+              //         dispatch({
+              //           type: 'deleteTask',
+              //           payload: { id: task.id },
+              //         })
+              //       }
+              //     >
+              //       delete{' '}
+              //     </button>
+              //   </td>
+              // </tr>
               return (
-                <tr key={index}>
-                  <td className="border-2">{task.id}</td>
-                  <td className="border-2">{task.taskName}</td>
-                  <td className="border-2">
-                    {' '}
-                    {task.completed ? 'naa' : 'wala'}
-                  </td>
-                  <td className="border-2">
-                    <button
-                      onClick={() => {
-                        dispatch({
-                          type: 'markTask',
-                          payload: {
-                            id: task.id,
-                          },
-                        })
-                      }}
-                    >
-                      mark
-                    </button>
-                  </td>
-                  <td className="border-2">
-                    <button
-                      onClick={() =>
-                        dispatch({
-                          type: 'deleteTask',
-                          payload: { id: task.id },
-                        })
-                      }
-                    >
-                      delete{' '}
-                    </button>
-                  </td>
-                </tr>
-                // <Task
-                //   task={task}
-                //   key={index}
-                //   dispatch={() => {
-                //     dispatch({
-                //       type: "markTask",
-                //       payload: {
-                //         id: task.id,
-                //         name: task.task,
-                //         completed: true,
-                //       },
-                //     });
-                //   }}
-                // />
+                <Task
+                  task={task}
+                  key={index}
+                  doDispatch={(d) =>
+                    dispatch({
+                      type: d.type,
+                      payload: { id: d.id },
+                    })
+                  }
+                />
               )
             })}
           </tbody>
