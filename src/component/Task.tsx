@@ -12,7 +12,7 @@ const Task = ({ task, doDispatch }: All_children) => {
       <tr>
         <td className="border-2">{task.id}</td>
         <td className="border-2">{task.taskName}</td>
-        <td className="border-2"> {task.completed ? 'naa' : 'wala'}</td>
+        <td className="border-2"> {task.completed ? 'Done' : 'Pending'}</td>
         <td className="border-2">
           <button
             onClick={() =>

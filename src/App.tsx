@@ -1,19 +1,19 @@
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useState } from 'react'
 
-import ListOfItems from "./grocery/ListOfItems";
-import Item from "./grocery/Item";
-import Increment from "./component/Increment";
-import Item2 from "./grocery/Item2";
-import { FieldValues } from "react-hook-form";
-import Counter from "./component/Counter";
-import Tasks from "./reducers/Tasks";
+import ListOfItems from './grocery/ListOfItems'
+import Item from './grocery/Item'
+import Increment from './component/Increment'
+import Item2 from './grocery/Item2'
+import { FieldValues } from 'react-hook-form'
+import Counter from './component/Counter'
+import Tasks from './component/Tasks'
 
 function App() {
   const [list, setList] = useState([
-    { id: 0, itemName: "", quantity: 0, price: 0, totalAmount: 0, group: "" },
-  ]);
+    { id: 0, itemName: '', quantity: 0, price: 0, totalAmount: 0, group: '' },
+  ])
 
-  const [category, SetCategory] = useState(["Weapon", "Food", "others"]);
+  const [category, SetCategory] = useState(['Weapon', 'Food', 'others'])
 
   const onAdd = (item: FieldValues) =>
     setList([
@@ -26,7 +26,7 @@ function App() {
         totalAmount: Number(item.price) * Number(item.quantity),
         group: item.group,
       },
-    ]);
+    ])
 
   return (
     <div className="App">
@@ -48,7 +48,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
