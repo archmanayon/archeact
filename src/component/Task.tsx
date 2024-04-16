@@ -1,8 +1,10 @@
 import { Task_type } from '../reducers/Tasks'
 
+type para = { type: string; id?: number }
+
 type All_children = {
   task: Task_type
-  doDispatch: ({}) => void
+  doDispatch: ({}: para) => void
 }
 const Task = ({ task, doDispatch }: All_children) => {
   return (
