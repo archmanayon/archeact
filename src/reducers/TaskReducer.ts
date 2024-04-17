@@ -1,13 +1,10 @@
-import { useReducer, useState } from 'react'
-import Task from '../component/Task'
-
 export type Task_type = {
   id?: number
   taskName?: string
   completed?: boolean
 }
 
-interface TaskScript {
+export interface TaskScript {
   type?: string
   payload: Task_type
 }

@@ -1,4 +1,4 @@
-import { Task_type } from '../reducers/Tasks'
+import { Task_type } from '../reducers/TaskReducer'
 
 type para = { type: string; id?: number }
 

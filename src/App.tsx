@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react'
+import { MouseEvent, useReducer, useState } from 'react'
 
 import ListOfItems from './grocery/ListOfItems'
 import Item from './grocery/Item'
@@ -7,6 +7,8 @@ import Item2 from './grocery/Item2'
 import { FieldValues } from 'react-hook-form'
 import Counter from './component/Counter'
 import Tasks from './component/Tasks'
+import TasksContext from './context/taskContext'
+import TaskReducer from './reducers/TaskReducer'
 
 function App() {
   const [list, setList] = useState([
@@ -28,6 +30,8 @@ function App() {
       },
     ])
 
+  const [tasks, dispatch] = useReducer(TaskReducer, [])
+
   return (
     <div className="App">
       <div>
@@ -40,13 +44,17 @@ function App() {
             setList(list.filter((item) => item.id !== selectId))
           }
         />
-        <div className="">
-          <Counter />
-        </div>
-        <div>
-          <Tasks />
-        </div>
       </div>
+      <TasksContext.Provider value={{ tasks, dispatch }}>
+        <div>
+          <div className="">
+            <Counter />
+          </div>
+          <div>
+            <Tasks />
+          </div>
+        </div>
+      </TasksContext.Provider>
     </div>
   )
 }

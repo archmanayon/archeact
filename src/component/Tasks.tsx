@@ -1,22 +1,14 @@
-import { useReducer, useState } from 'react'
+import { useContext, useReducer, useState } from 'react'
 import Task from '../component/Task'
 import TaskReducer from '../reducers/TaskReducer'
+import { Task_type } from '../reducers/TaskReducer'
+import TasksContext from '../context/taskContext'
 
-export type Task_type = {
-  id?: number
-  taskName?: string
-  completed?: boolean
-}
-
-export const ACTION = {
-  ADD_TASK: 'addTask',
-  MARK_TASK: 'markTask',
-  DELETE_TASK: 'deleteTask',
-}
 const Tasks = () => {
   const [taskName, setTaskName] = useState('')
+  const { tasks, dispatch } = useContext(TasksContext)
 
-  const [tasks, dispatch] = useReducer(TaskReducer, [])
+  //   const [tasks, dispatch] = useReducer(TaskReducer, [])
   console.log(tasks)
 
   return (
