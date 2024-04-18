@@ -3,13 +3,12 @@ import { Task_type } from './TaskReducer'
 type para = { type: string; id?: number }
 
 type All_children = {
-  index?: number
   task: Task_type
   doDispatch: ({}: para) => void
 }
-const Task = ({ index, task, doDispatch }: All_children) => {
+const Task = ({ task, doDispatch }: All_children) => {
   return (
-    <tr key={index}>
+    <tr>
       <td className="border-2">{task.id}</td>
       <td className="border-2">{task.taskName}</td>
       <td className="border-2"> {task.completed ? 'Done' : 'Pending'}</td>

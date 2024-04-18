@@ -44,7 +44,7 @@ const Tasks = () => {
             {tasks?.map((task: Task_type, index) => {
               return (
                 <Task
-                  index={index}
+                  key={index}
                   task={task}
                   doDispatch={(d) =>
                     dispatch({

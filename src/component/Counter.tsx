@@ -27,13 +27,9 @@ const Counter = () => {
       </div>
       <div className="bg-gray-800 h-10 w-5 ml-3">
         showing all tasks from reducer, by maping:
-        <table>
-          <tbody>
-            {tasks?.map((task) => (
-              <tr>{task.taskName}</tr>
-            ))}
-          </tbody>
-        </table>
+        {tasks?.map((task, index) => (
+          <div key={index}>{task.taskName}</div>
+        ))}
       </div>
       <div className="bg-gray-800 h-10 w-5 ml-3">{state.count}</div>
 
