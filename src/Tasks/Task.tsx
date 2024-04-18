@@ -1,12 +1,12 @@
-import { Task_type } from './TaskReducer'
+import { TaskScript, Task_type } from './TaskReducer'
 
 type para = { type: string; id?: number }
 
 type All_children = {
   task: Task_type
-  doDispatch: ({}: para) => void
+  dispatch: React.Dispatch<TaskScript>
 }
-const Task = ({ task, doDispatch }: All_children) => {
+const Task = ({ task, dispatch }: All_children) => {
   return (
     <tr>
       <td className="border-2">{task.id}</td>
@@ -15,9 +15,9 @@ const Task = ({ task, doDispatch }: All_children) => {
       <td className="border-2">
         <button
           onClick={() =>
-            doDispatch({
+            dispatch({
               type: 'markTask',
-              id: task.id,
+              payload: { id: task.id },
             })
           }
         >
@@ -27,9 +27,9 @@ const Task = ({ task, doDispatch }: All_children) => {
       <td className="border-2">
         <button
           onClick={() =>
-            doDispatch({
+            dispatch({
               type: 'deleteTask',
-              id: task.id,
+              payload: { id: task.id },
             })
           }
         >

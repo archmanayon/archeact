@@ -1,6 +1,5 @@
-import { useContext, useReducer, useState } from 'react'
+import { useContext, useState } from 'react'
 import Task from './Task'
-import TaskReducer from './TaskReducer'
 import { Task_type } from './TaskReducer'
 import TasksContext from './taskContext'
 
@@ -42,18 +41,7 @@ const Tasks = () => {
               <th className="border-2">delete</th>
             </tr>
             {tasks?.map((task: Task_type, index) => {
-              return (
-                <Task
-                  key={index}
-                  task={task}
-                  doDispatch={(d) =>
-                    dispatch({
-                      type: d.type,
-                      payload: { id: d.id },
-                    })
-                  }
-                />
-              )
+              return <Task key={index} task={task} dispatch={dispatch} />
             })}
           </tbody>
         </table>
