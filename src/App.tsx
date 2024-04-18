@@ -9,6 +9,7 @@ import Counter from './component/Counter'
 import Tasks from './component/Tasks'
 import TasksContext from './context/taskContext'
 import TaskReducer from './reducers/TaskReducer'
+import TaskProvider from './StateManagement/TaskProvider'
 
 function App() {
   const [list, setList] = useState([
@@ -30,8 +31,6 @@ function App() {
       },
     ])
 
-  const [tasks, dispatch] = useReducer(TaskReducer, [])
-
   return (
     <div className="App">
       <div>
@@ -45,7 +44,8 @@ function App() {
           }
         />
       </div>
-      <TasksContext.Provider value={{ tasks, dispatch }}>
+
+      <TaskProvider>
         <div>
           <div className="">
             <Counter />
@@ -54,7 +54,7 @@ function App() {
             <Tasks />
           </div>
         </div>
-      </TasksContext.Provider>
+      </TaskProvider>
     </div>
   )
 }
