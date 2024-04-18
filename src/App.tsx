@@ -6,10 +6,10 @@ import Increment from './component/Increment'
 import Item2 from './grocery/Item2'
 import { FieldValues } from 'react-hook-form'
 import Counter from './component/Counter'
-import Tasks from './component/Tasks'
-import TasksContext from './context/taskContext'
-import TaskReducer from './reducers/TaskReducer'
-import TaskProvider from './StateManagement/TaskProvider'
+import Tasks from './Tasks/Tasks'
+import TasksContext from './Tasks/taskContext'
+import TaskReducer from './Tasks/TaskReducer'
+import TaskProvider from './Tasks/TaskProvider'
 
 function App() {
   const [list, setList] = useState([

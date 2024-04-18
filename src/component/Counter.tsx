@@ -3,7 +3,7 @@ const ACTION = {
   MINUS: 'minus',
 }
 import { useContext, useReducer } from 'react'
-import TasksContext from '../context/taskContext'
+import TasksContext from '../Tasks/taskContext'
 type ActionType = {
   type: string
 }

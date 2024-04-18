@@ -1,8 +1,8 @@
 import { useContext, useReducer, useState } from 'react'
-import Task from '../component/Task'
-import TaskReducer from '../reducers/TaskReducer'
-import { Task_type } from '../reducers/TaskReducer'
-import TasksContext from '../context/taskContext'
+import Task from './Task'
+import TaskReducer from './TaskReducer'
+import { Task_type } from './TaskReducer'
+import TasksContext from './taskContext'
 
 const Tasks = () => {
   const [taskName, setTaskName] = useState('')
@@ -44,8 +44,8 @@ const Tasks = () => {
             {tasks?.map((task: Task_type, index) => {
               return (
                 <Task
+                  index={index}
                   task={task}
-                  key={index}
                   doDispatch={(d) =>
                     dispatch({
                       type: d.type,

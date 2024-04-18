@@ -1,5 +1,5 @@
 import React from 'react'
-import { TaskScript, Task_type } from '../reducers/TaskReducer'
+import { TaskScript, Task_type } from './TaskReducer'
 
 type TasksContextType = {
   tasks: Task_type[]
