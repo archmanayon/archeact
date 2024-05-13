@@ -9,12 +9,15 @@ type ActionType = {
   type: string
 }
 
-function reduce_func(state: { count: number }, action: ActionType) {
+function reduce_func(
+  state: { count: number; tatski: number },
+  action: ActionType
+) {
   switch (action.type) {
     case ACTION.ADD:
-      return { count: state.count + 1 }
+      return { ...state, count: state.count + 1 }
     case ACTION.MINUS:
-      return { count: state.count - 1 }
+      return { ...state, count: state.count - 1 }
     default:
       return state
   }
@@ -23,15 +26,18 @@ function reduce_func(state: { count: number }, action: ActionType) {
 const Counter = () => {
   const fromZusState = sampleZus_counter((state) => state)
 
-  const [state, dispatch] = useReducer(reduce_func, {
+  const [state, dispatch_a_Num] = useReducer(reduce_func, {
     count: 0,
+    tatski: 66,
   })
   const { tasks } = useContext(TasksContext)
   return (
     <>
       <div className="bg-gray-800 h-10 w-5 ml-3">
         Only SampleContext Provider first item first array :::{' '}
-        {tasks[0]?.taskName}
+        {tasks.map((task) => (
+          <div>{task.id}</div>
+        ))}
       </div>
       <div className="bg-gray-800 h-10 w-5 ml-3">
         showing all tasks from reducer, by maping:::
@@ -39,11 +45,13 @@ const Counter = () => {
           <div key={index}>{task.taskName}</div>
         ))}
       </div>
-      <div className="bg-gray-800 h-10 w-5 ml-3">{state.count}</div>
+      <div className="bg-gray-800 h-10 w-5 ml-3">
+        updated:{state.count} sample object from reduder state: {state.tatski}
+      </div>
 
-      <button onClick={() => dispatch({ type: 'minus' })}> Minus </button>
+      <button onClick={() => dispatch_a_Num({ type: 'minus' })}> Minus </button>
 
-      <button onClick={() => dispatch({ type: 'plus' })}> Plus </button>
+      <button onClick={() => dispatch_a_Num({ type: 'plus' })}> Plus </button>
       <div>
         <button onClick={fromZusState.fifteenFunc}> Go to 115 </button>
         <button onClick={fromZusState.deductFiveFunc}> Go 2000 please </button>
